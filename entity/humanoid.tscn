@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3r28utl5xint"]
+
+[ext_resource type="PackedScene" uid="uid://bc7to0a8a87hx" path="res://entity/entity.tscn" id="1_b7xq8"]
+[ext_resource type="PackedScene" uid="uid://bi6bclrmqk2jq" path="res://models/basichumanoid.fbx" id="2_ik0tq"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_iu5e0"]
+graph_offset = Vector2(-833.679, 28.0219)
+
+[node name="Entity" instance=ExtResource("1_b7xq8")]
+
+[node name="basichumanoid" parent="." index="5" instance=ExtResource("2_ik0tq")]
+
+[node name="Skeleton3D" parent="basichumanoid/Armature" index="0"]
+bones/0/position = Vector3(0, 1.81881e-05, -0.0997115)
+bones/1/position = Vector3(1.37209e-18, 0.0046948, -3.51474e-11)
+bones/1/rotation = Quaternion(0.869996, 0.493055, -0.00095545, 0.00168512)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/position = Vector3(1.12503e-08, 0.0174842, -5.77797e-11)
+bones/2/rotation = Quaternion(-0.0419426, 0.131365, 0.484989, 0.863579)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/position = Vector3(1.32322e-09, 0.058, -2.49025e-15)
+bones/3/rotation = Quaternion(-0.0232592, 8.98244e-10, 2.0504e-08, 0.99973)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/position = Vector3(1.23165e-16, 0.068, 3.39462e-16)
+bones/4/rotation = Quaternion(0.707107, -2.99996e-11, -1.78365e-07, 0.707107)
+bones/4/scale = Vector3(1, 1, 1)
+bones/6/position = Vector3(1.37209e-18, 0.0046948, -3.51474e-11)
+bones/6/rotation = Quaternion(0.869996, -0.493055, 0.000954731, 0.00168535)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/position = Vector3(-1.12503e-08, 0.0174842, -5.98075e-11)
+bones/7/rotation = Quaternion(-0.0502327, -0.145852, -0.483382, 0.861711)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/position = Vector3(-1.32322e-09, 0.058, 1.80646e-15)
+bones/8/rotation = Quaternion(-0.0232592, -1.5796e-08, -9.18874e-09, 0.99973)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/position = Vector3(-1.23165e-16, 0.068, -5.94724e-16)
+bones/9/rotation = Quaternion(0.707107, 1.05369e-08, -1.67563e-07, 0.707107)
+bones/9/scale = Vector3(1, 1, 1)
+bones/11/position = Vector3(1.37209e-18, 0.0046948, -3.51474e-11)
+bones/11/rotation = Quaternion(-0.00193704, -3.17865e-08, 1.32391e-09, 0.999998)
+bones/12/position = Vector3(2.06868e-17, 0.0400168, 6.2864e-11)
+bones/12/rotation = Quaternion(1.53525e-21, 3.15914e-38, -8.12753e-44, 1)
+bones/13/position = Vector3(0, 0.055, 0)
+bones/13/rotation = Quaternion(-4.43633e-07, 6.21287e-08, -0.707107, 0.707107)
+bones/13/scale = Vector3(1, 1, 1)
+bones/14/position = Vector3(-2.00425e-24, 0.039, 8.8987e-20)
+bones/14/rotation = Quaternion(-3.47125e-07, 3.35383e-09, -0.635839, 0.771822)
+bones/14/scale = Vector3(1, 1, 1)
+bones/15/position = Vector3(-3.25363e-26, 0.0513747, -1.77636e-19)
+bones/15/rotation = Quaternion(1.72085e-15, 2.08722e-14, -3.72529e-09, 1)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/position = Vector3(0, 0.0506425, 2.01948e-28)
+bones/16/rotation = Quaternion(-3.15544e-30, 2.64698e-23, -2.05231e-24, 1)
+bones/18/position = Vector3(0, 0.055, 0)
+bones/18/rotation = Quaternion(5.25744e-07, -1.99819e-08, 0.707107, 0.707107)
+bones/18/scale = Vector3(1, 1, 1)
+bones/19/position = Vector3(-2.07319e-24, 0.039, -1.69136e-22)
+bones/19/rotation = Quaternion(4.81045e-07, -3.25181e-09, 0.628513, 0.777799)
+bones/19/scale = Vector3(1, 1, 1)
+bones/20/position = Vector3(2.14751e-26, 0.0513747, 1.61559e-27)
+bones/20/rotation = Quaternion(3.4972e-15, 2.57572e-14, 2.4078e-15, 1)
+bones/21/position = Vector3(1.92593e-34, 0.0506425, 2.01948e-28)
+bones/21/rotation = Quaternion(3.9443e-30, -2.64698e-23, 1.55298e-24, 1)
+bones/23/position = Vector3(0, 0.055, 0)
+bones/23/rotation = Quaternion(0, 5.29396e-23, 0, 1)
+bones/23/scale = Vector3(1, 1, 1)
+bones/24/position = Vector3(0, 0.0138744, 0)
+bones/24/rotation = Quaternion(-0.196128, -5.97828e-14, 1.40282e-07, 0.980578)
+bones/24/scale = Vector3(1, 1, 1)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="6"]
+root_node = NodePath("../basichumanoid")
+tree_root = SubResource("AnimationNodeBlendTree_iu5e0")
+anim_player = NodePath("../basichumanoid/AnimationPlayer")
+
+[editable path="basichumanoid"]

@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://2uvps7bcihbl"]
+
+[ext_resource type="Script" uid="uid://bwpcqoo2wsq6j" path="res://autoloads/loading_screen/loading_screen.gd" id="1_j44h2"]
+
+[node name="LoadingScreen" type="Control"]
+process_priority = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j44h2")
+loading_text = "Loading..."
+
+[node name="Container" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.8
+anchor_right = 0.7
+anchor_bottom = 0.9
+
+[node name="LoadingBar" type="ColorRect" parent="Container"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = 2.0
+offset_right = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.243569, 0.243569, 0.243569, 1)
+
+[node name="LoadedBar" type="ColorRect" parent="Container/LoadingBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.05
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = -5.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.958748, 0.868971, 0.0402492, 1)
+
+[node name="LoadingInfo" type="RichTextLabel" parent="Container"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = -5.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Loading..."
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1

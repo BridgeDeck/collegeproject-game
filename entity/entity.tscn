@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc7to0a8a87hx"]
+
+[ext_resource type="Script" uid="uid://c4xftn6sbf0y6" path="res://entity/entity.gd" id="1_bclhr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bclhr"]
+size = Vector3(0.5, 2, 0.5)
+
+[node name="Entity" type="CharacterBody3D"]
+script = ExtResource("1_bclhr")
+
+[node name="LookFrom" type="Marker3D" parent="."]
+
+[node name="LookAt" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+top_level = true
+
+[node name="GoTo" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.998, -1)
+top_level = true
+
+[node name="GoFrom" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.991231, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_bclhr")

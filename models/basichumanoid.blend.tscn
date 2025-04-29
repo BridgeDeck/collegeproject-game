@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://p5ra5v2r7ygs"]
+
+[ext_resource type="PackedScene" uid="uid://gxqvq4iiwfx2" path="res://models/basichumanoid.blend" id="1_rkgvx"]
+
+[node name="basichumanoid" instance=ExtResource("1_rkgvx")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(-6.14758e-09, -10.7924, -0.00181881)
+bones/2/rotation = Quaternion(0.616894, 0.349546, 0.34773, 0.613469)
+bones/3/rotation = Quaternion(-0.687544, 0.0306658, -0.0116774, 0.725401)
+bones/4/rotation = Quaternion(0.707107, -3.45736e-09, -1.65459e-07, 0.707107)
+bones/6/rotation = Quaternion(-0.466105, 0.264157, -0.416324, 0.734603)
+bones/7/rotation = Quaternion(6.88693e-15, -1.12257e-14, -1.49012e-08, 1)
+bones/8/rotation = Quaternion(0.707107, -2.51215e-15, -1.68587e-07, 0.707107)
+bones/9/rotation = Quaternion(-0.00193704, -3.17864e-08, 1.32391e-09, 0.999998)
+bones/10/rotation = Quaternion(-0.110669, 0.037361, -0.0169587, 0.99301)
+bones/12/rotation = Quaternion(0.651735, -0.0292932, -0.340695, 0.676986)
+bones/13/rotation = Quaternion(-0.556221, 0.0179516, -0.0753758, 0.827415)
+bones/16/rotation = Quaternion(-0.662707, -0.419429, 0.300033, 0.543028)
+bones/17/rotation = Quaternion(-6.98492e-10, -1.90921e-08, -1.86265e-08, 1)
+bones/20/rotation = Quaternion(-0.0943081, 0.000989074, 0.00840709, 0.995507)
