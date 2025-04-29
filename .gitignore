@@ -1,0 +1,5 @@
+# Blender backup file
+*.blend1 
+
+# Godot cache
+.godot/
