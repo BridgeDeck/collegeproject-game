@@ -12,6 +12,9 @@ The reason why maps should handle everything that happens within them is to keep
 ## User Configuration Handler
 **NOT IMPLEMENTED YET**
 
+This autoload handles all persistent data related to the user, and should remain entirely local. Things such as control, graphical, auditorial and other settings are handled here, but also more major data like save files, achievements and unlockables, although those might have their own autoloads to handle them, and they will use this autoload for knowing what to look for.
+This autoload also comes with a UI that can be activated anytime, and can even have additional settings added into them beyond just the built-in ones.
+
 ## Local Player Input and Camera Handler (LocalPlayer)
 In multiplayer games, there are two sides with events happening in them: Client-side and Server-side. The Server-side handles all the important game logic, events and data. Meanwhile the Client-side handles everything that makes the game responsive and alive to the player, like the local camera, UI elements representing important data, and player input; This autoload is meant to handle everything related to the Client, but it isnt the only one that does. 
 
