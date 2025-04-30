@@ -7,13 +7,13 @@ The plan is to make every major game function its own autoload to ease testing, 
 This autoload only handles the loading and switching of maps, the maps themselves are meant to have their own code handling whatever happens in them, making use of the other autoloads to do more universally important stuff.
 
 ### Why maps should handle themselves
-The reason why maps should handle everything that happens within them is to keep testing simple. Simply running the scene itself in Godot 
+The reason why maps should handle everything that happens within them is to keep playtesting simple. You should be able to simply run the scene itself in Godot to test how the map feels, without complex wrapper scenes on top providing dependencies. The map loader should not even run any functions in a map after loading it, Godot has the `_ready` method for the map to use to start doing things; the loader should only be concerned with letting anything else know, via signals, that maps are changing.
 
-
-## Player Data Handler
+## User Configuration Handler
 **NOT IMPLEMENTED YET**
 
-## Local Player Input and Events Handler (LocalPlayer)
+## Local Player Input and Camera Handler (LocalPlayer)
+In multiplayer games, there are two sides with events happening in them: Client-side and Server-side. The Server-side handles all the important game logic, events and data. Meanwhile the Client-side handles everything that makes the game responsive and alive to the player, like the local camera, UI elements representing important data, and player input; This autoload is meant to handle everything related to the Client, but it isnt the only one that does.
 
 ## Loading Screen (LoadingScreen)
 
