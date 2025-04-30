@@ -37,4 +37,4 @@ An autoload that handles the visibility of the pause menu, with additional prope
 An important autoload that handles the creation and deletion of entities that interact with the world and provide a way for players to affect things. This will delete entities automatically when maps change, but can also make exceptions for certain entities and copy them to another map.
 
 ## Projectile Handler (???)
-An important autoload that handles projectiles, both physical projectiles and hitscan bullets.
+An important autoload that handles projectiles, both physical projectiles and hitscan bullets. A physical projectile may count as an entity, so it relies on the Entity handler to create those.
