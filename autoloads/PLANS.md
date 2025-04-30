@@ -34,6 +34,7 @@ An autoload that handles the visibility of the main menu. Entirely local.
 An autoload that handles the visibility of the pause menu, with additional properties and signals to notify anything else about pauses. Mostly local but has a property that synchronizes across every client that says if the server host or someone else with authority has paused the game or not.
 
 ## Entity Handler (???)
-An important autoload that handles the direct creation of 
+An important autoload that handles the creation and deletion of entities that interact with the world and provide a way for players to affect things. This will delete entities automatically when maps change, but can also make exceptions for certain entities and copy them to another map.
 
 ## Projectile Handler (???)
+An important autoload that handles projectiles, both physical projectiles and hitscan bullets.
