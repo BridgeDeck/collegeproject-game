@@ -9,26 +9,27 @@ This autoload only handles the loading and switching of maps, the maps themselve
 ### Why maps should handle themselves
 The reason why maps should handle everything that happens within them is to keep playtesting simple. You should be able to simply run the scene itself in Godot to test how the map feels, without complex wrapper scenes on top providing dependencies. The map loader should not even run any functions in a map after loading it, Godot has the `_ready` method for the map to use to start doing things; the loader should only be concerned with letting anything else know, via signals, that maps are changing.
 
-## User Configuration Handler (**NOT YET IMPLEMENTED**)
-This autoload handles all persistent data related to the user, and should remain entirely local. Things such as control, graphical, auditorial and other settings are handled here, but also more major data like save files, achievements and unlockables, although those might have their own autoloads to handle them, and they will use this autoload for knowing what to look for.
-This autoload also comes with a UI that can be activated anytime, and can even have additional settings added into them beyond just the built-in ones.
-
 ## Local Player Input and Camera Handler (LocalPlayer)
 In multiplayer games, there are two sides with events happening in them: Client-side and Server-side. The Server-side handles all the important game logic, events and data. Meanwhile the Client-side handles everything that makes the game responsive and alive to the player, like the local camera, UI elements representing important data, and player input; This autoload is meant to handle everything related to the Client, but it isnt the only one that does. 
 
 ### Other local autoloads
-Other autoloads that do things on the client side will exist, and they should have the prefix "Local" only if they are exclusively local, and have no remote capability (They don't have RPC functions, don't do anything with their `multiplayer` property and only use other autoloads if they need data related to remote things) .
+Other autoloads that do things on the client side will exist, and they should have the prefix "Local" only if they are exclusively local, and have no remote capability (They don't have RPC functions, don't do anything with their `multiplayer` property and only use other autoloads if they need data related to remote things).
+
+## User Configuration Handler (???)
+This autoload handles all persistent data related to the user, and should remain entirely local. Things such as control, graphical, auditorial and other settings are handled here, but also more major data like save files, achievements and unlockables, although those might have their own autoloads to handle them, and they will use this autoload for knowing what to look for.
+This autoload also comes with a UI that can be activated anytime, and can even have additional settings added into them beyond just the built-in ones.
 
 ## Loading Screen (LoadingScreen)
 TODO: Rename LoadingScreen to LocalLoadingScreen
 
 A simple autoload that simply handles the visibility, progress and text of a loading screen. Entirely local.
 
-## Main Menu (**NOT YET IMPLEMENTED**)
+## Main Menu (???)
+An autoload that handles the visibility of the main menu. Entirely local.
 
+## Pause Menu (???)
+An autoload that handles the visibility of the pause menu, with additional properties and signals to notify anything else about pauses.
 
-## Pause Menu (**NOT YET IMPLEMENTED**)
+## Entity Handler (???)
 
-## Entity Handler (**NOT YET IMPLEMENTED**)
-
-## Projectile Handler (**NOT YET IMPLEMENTED**)
+## Projectile Handler (???)
