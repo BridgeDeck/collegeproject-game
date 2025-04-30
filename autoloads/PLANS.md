@@ -31,8 +31,9 @@ A simple autoload that simply handles the visibility, progress and text of a loa
 An autoload that handles the visibility of the main menu. Entirely local.
 
 ## Pause Menu (???)
-An autoload that handles the visibility of the pause menu, with additional properties and signals to notify anything else about pauses.
+An autoload that handles the visibility of the pause menu, with additional properties and signals to notify anything else about pauses. Mostly local but has a property that synchronizes across every client that says if the server host or someone else with authority has paused the game or not.
 
 ## Entity Handler (???)
+An important autoload that handles the direct creation of 
 
 ## Projectile Handler (???)
