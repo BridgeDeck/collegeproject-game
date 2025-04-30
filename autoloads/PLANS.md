@@ -19,8 +19,12 @@ In multiplayer games, there are two sides with events happening in them: Client-
 Other autoloads that do things on the client side will exist, and they should have the prefix "Local" only if they are exclusively local, and have no remote capability (They don't have RPC functions, don't do anything with their `multiplayer` property and only use other autoloads if they need data related to remote things) .
 
 ## Loading Screen (LoadingScreen)
+TODO: Rename LoadingScreen to LocalLoadingScreen
+
+A simple autoload that simply handles the visibility, progress and text of a loading screen. Entirely local.
 
 ## Main Menu
+
 
 ## Pause Menu
 
