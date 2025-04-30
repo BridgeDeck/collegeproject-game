@@ -6,6 +6,10 @@ The plan is to make every major game function its own autoload to ease testing, 
 ## Map Loading Handler (MapHandler)
 This autoload only handles the loading and switching of maps, the maps themselves are meant to have their own code handling whatever happens in them, making use of the other autoloads to do more universally important stuff.
 
+### Why maps should handle themselves
+The reason why maps should handle everything that happens within them is to keep testing simple. Simply running the scene itself in Godot 
+
+
 ## Player Data Handler
 **NOT IMPLEMENTED YET**
 
