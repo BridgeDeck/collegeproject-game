@@ -25,10 +25,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta 
 	else:
-		force = force - (force*up_direction)
+		velocity = velocity - (velocity*up_direction)
 	
-	velocity.x = lerpf(velocity.x, force.x, 0.5)
-	velocity.z = lerpf(velocity.z, force.z, 0.5)
+	velocity.x = lerpf(velocity.x, force.x, delta)
+	velocity.z = lerpf(velocity.z, force.z, delta)
 	
 
 	# Handle jump.
