@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://oinskgbagdc7"]
+
+[ext_resource type="Script" uid="uid://dkxn7juvm3n6y" path="res://ui/userconfig/test_configui.gd" id="1_4mf57"]
+[ext_resource type="Script" uid="uid://xmoxo21wlbpe" path="res://ui/userconfig/indieconfig.gd" id="2_nyo5c"]
+
+[node name="TestConfigui" type="Node"]
+script = ExtResource("1_4mf57")
+
+[node name="IndieConfig" type="Node" parent="."]
+script = ExtResource("2_nyo5c")
+metadata/_custom_type_script = "uid://xmoxo21wlbpe"
