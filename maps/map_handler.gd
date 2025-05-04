@@ -5,6 +5,12 @@ signal loaded_map(path)
 
 var current_map:BaseMap
 
+func _enter_tree() -> void:
+	get_tree().root.ready.connect(_on_root_ready, CONNECT_ONE_SHOT)
+
+func _on_root_ready():
+	if get_tree().current_scene is BaseMap:
+		current_map = get_tree().current_scene
 
 func load_map_by_path(path:String)->int:
 	if Engine.is_editor_hint(): 

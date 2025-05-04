@@ -1,18 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://bc7to0a8a87hx"]
+[gd_scene load_steps=4 format=3 uid="uid://bc7to0a8a87hx"]
 
 [ext_resource type="Script" uid="uid://c4xftn6sbf0y6" path="res://entity/entity.gd" id="1_bclhr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bclhr"]
 size = Vector3(0.5, 2, 0.5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_mckvm"]
+size = Vector3(0.5, 1, 0.5)
+
 [node name="Entity" type="CharacterBody3D"]
 script = ExtResource("1_bclhr")
 
+[node name="LookFromCrouched" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.174875, 0)
+
+[node name="LookFromUncrouched" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.795818, 0)
+
 [node name="LookFrom" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.795818, 0)
 
 [node name="LookAt" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.849638, -1)
 top_level = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="DefaultCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_bclhr")
+debug_color = Color(0, 0, 1, 0.560784)
+
+[node name="CrouchCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_mckvm")
+debug_color = Color(0.72853, 0.474321, 0, 0.42)

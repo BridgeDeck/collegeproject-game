@@ -53,8 +53,22 @@ func _process(delta: float) -> void:
 		
 		var v = Input.get_vector("strafe_left", "strafe_right", "forward", "backward")
 		
+		
+		var action_flags = MainCharacterEntity.generate_player_action_flag(
+			Input.is_action_pressed("jump"),
+			Input.is_action_pressed("crouch"),
+			Input.is_action_pressed("action1"),
+			Input.is_action_pressed("action2"),
+			Input.is_action_pressed("action3"),
+			Input.is_action_pressed("dash")
+		)
+
+		## TODO Add function to equip different items
+		var equipped = -1
+
+		controlled_entity.player_input(v, player_camera.basis, action_flags, equipped)
 		#controlled_entity.force = (player_camera.basis * Vector3(v.x, 0, v.y)).normalized().slide(Vector3.UP) * 18
-		controlled_entity.add_force((player_camera.basis * Vector3(v.x, 0, v.y)).slide(Vector3.UP).normalized(), true)
+		# controlled_entity.add_force((player_camera.basis * Vector3(v.x, 0, v.y)).slide(Vector3.UP).normalized(), true)
 		
 		player_camera.position = controlled_entity.get_node("LookFrom").global_position
 		#player_camera.look_at(controlled_entity.get_node("LookAt").position, controlled_entity.up_direction)

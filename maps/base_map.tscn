@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bq8r8yk47xi2m"]
 
 [ext_resource type="Script" uid="uid://ds6ewv0eyt338" path="res://maps/base_map.gd" id="1_ysskv"]
-[ext_resource type="PackedScene" uid="uid://bc7to0a8a87hx" path="res://entity/entity.tscn" id="2_2cee8"]
+[ext_resource type="PackedScene" uid="uid://2nkpcd1p6e51" path="res://entity/mc_entity.tscn" id="2_2cee8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ysskv"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -44,5 +44,5 @@ transform = Transform3D(-0.251567, 0.749219, -0.614796, 0, 0.634354, 0.773052, 0
 current = true
 fov = 90.0
 
-[node name="Entity" parent="." instance=ExtResource("2_2cee8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.03046, 0)
+[node name="MainCharacterEntity" parent="." instance=ExtResource("2_2cee8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.533, 2.87783, -0.162)
