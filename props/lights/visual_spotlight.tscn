@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwuightqiopbw"]
+
+[ext_resource type="Script" uid="uid://o1opesx4ssd2" path="res://props/lights/visual_spotlight.gd" id="1_iff7n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iff7n"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 1, 0.317647, 0.25)
+
+[node name="VisualSpotlight" type="SpotLight3D"]
+light_color = Color(1, 1, 0.317647, 1)
+light_energy = 1.19
+light_specular = 2.346
+light_cull_mask = 4294967293
+spot_range = 106.0
+spot_attenuation = -1.0
+spot_angle = 10.6413
+spot_angle_attenuation = 0.196147
+script = ExtResource("1_iff7n")
+visual_light_transparency = 0.25
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -8.9407e-08, -1, 0, 1, -8.9407e-08, 0, 0, -53)
+layers = 2
+cast_shadow = 0
+gi_mode = 2
+radius = 19.574
+height = 106.0
+cone = true
+material = SubResource("StandardMaterial3D_iff7n")

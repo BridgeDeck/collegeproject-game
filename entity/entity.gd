@@ -9,7 +9,8 @@ const FLAG_ACTION3 = 1<<4
 
 @export var speed:float = 18
 @export var jump_force:float = 8
-@export var acceleration:float = 2
+@export var acceleration:float = 18*3
+@export var air_speed_modifier:float = 1.0
 
 var action_previous:int
 var action:int
@@ -58,25 +59,16 @@ func _physics_process(delta: float) -> void:
 	if (not ((action_previous & FLAG_JUMP) == FLAG_JUMP)) and ((action & FLAG_JUMP) == FLAG_JUMP):
 		velocity = (velocity - (velocity*up_direction)) + up_direction * jump_force
 	
-	# velocity.x = lerpf(velocity.x, force.x, delta*Engine.physics_ticks_per_second/2.0)
-	# velocity.z = lerpf(velocity.z, force.z, delta*Engine.physics_ticks_per_second/2.0)
-	velocity = (velocity - velocity*up_direction).move_toward(force, acceleration*delta) + velocity*up_direction
+	var modifiers = 1
+	if not is_on_floor():
+		modifiers -= air_speed_modifier
 	
-
-	# Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	#var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	#var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	#if direction:
-		#velocity.x = direction.x * SPEED
-		#velocity.z = direction.z * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-		#velocity.z = move_toward(velocity.z, 0, SPEED)
+	# if not is_on_floor():
+	# 	# infinite momentum
+	# 	velocity = (velocity - velocity*up_direction) + (force.normalized() * acceleration*delta*modifiers) + velocity*up_direction
+	# else: 
+	# 	velocity = (velocity - velocity*up_direction).move_toward(force, acceleration*delta*modifiers) + velocity*up_direction
+	velocity = (velocity - velocity*up_direction).move_toward(force, acceleration*delta*modifiers) + velocity*up_direction
 
 	move_and_slide()
 

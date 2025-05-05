@@ -18,8 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 MapHandler="*res://maps/map_handler.gd"
-LocalLoadingScreen="*res://autoloads/loading_screen/autoload.gd"
+LoadingScreen="*res://autoloads/loading_screen/autoload.gd"
 LocalPlayer="*res://autoloads/local_player.gd"
+LocalLoadingScreen="*res://autoloads/loading_screen/autoload.gd"
 LocalMainMenu="*res://ui/main_menu/autoload.gd"
 
 [input]
@@ -110,9 +111,16 @@ dash={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="terrain"
+3d_physics/layer_2="entity"
+3d_physics/layer_3="terrain_nonwalkable"
+
 [physics]
 
 3d/physics_engine="GodotPhysics3D"
+3d/default_gravity=29.4
 
 [rendering]
 

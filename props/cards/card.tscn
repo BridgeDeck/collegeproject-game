@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr0csw67gd8ck"]
+
+[ext_resource type="Script" uid="uid://xhrvaaf1rgqw" path="res://props/cards/card.gd" id="1_go7vi"]
+[ext_resource type="Texture2D" uid="uid://by2vvaa81vthn" path="res://pvz_packets.png" id="1_xm1bd"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xm1bd"]
+viewport_path = NodePath("CardArt/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_woqlg"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_xm1bd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_go7vi"]
+resource_local_to_scene = true
+albedo_color = Color(0.589297, 1, 0.403372, 1)
+
+[node name="Card" type="Node3D"]
+script = ExtResource("1_go7vi")
+
+[node name="CardArt" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.744545, 0)
+size = Vector3(1, 1.548, 0.01)
+material = SubResource("StandardMaterial3D_woqlg")
+
+[node name="SubViewport" type="SubViewport" parent="CardArt"]
+transparent_bg = true
+size = Vector2i(67, 92)
+
+[node name="Sprite2D" type="Sprite2D" parent="CardArt/SubViewport"]
+texture = ExtResource("1_xm1bd")
+centered = false
+offset = Vector2(-68, 0)
+flip_v = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00189209, 0.751808, 0.00579834)
+size = Vector3(1.03577, 1.58421, 0.00134277)
+material = SubResource("StandardMaterial3D_go7vi")
