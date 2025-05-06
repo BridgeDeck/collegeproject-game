@@ -1,34 +1,21 @@
-[gd_scene load_steps=14 format=3 uid="uid://cndtksx034aae"]
+[gd_scene load_steps=12 format=3 uid="uid://cndtksx034aae"]
 
 [ext_resource type="PackedScene" uid="uid://bq8r8yk47xi2m" path="res://maps/base_map.tscn" id="1_q213a"]
-[ext_resource type="Texture2D" uid="uid://b8tnb45m12xci" path="res://maps/tutorial_skybox.jpg" id="2_fwf7s"]
 [ext_resource type="PackedScene" uid="uid://cwuightqiopbw" path="res://props/lights/visual_spotlight.tscn" id="3_x7mfr"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_x7mfr"]
-panorama = ExtResource("2_fwf7s")
-
-[sub_resource type="Sky" id="Sky_2337y"]
-sky_material = SubResource("PanoramaSkyMaterial_x7mfr")
-
-[sub_resource type="Environment" id="Environment_50mgq"]
-background_mode = 2
-background_color = Color(0, 1, 1, 1)
-sky = SubResource("Sky_2337y")
+[sub_resource type="Environment" id="Environment_fwf7s"]
+background_mode = 4
 ambient_light_source = 1
 reflected_light_source = 1
-tonemap_exposure = 1.23
 glow_enabled = true
-glow_bloom = 0.36
-glow_hdr_threshold = 1.8
-glow_hdr_luminance_cap = 4.0
+glow_intensity = 0.95
 fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.0509804, 0, 0, 1)
-fog_light_energy = 16.0
+fog_light_color = Color(0.172987, 0, 0.00654156, 1)
+fog_light_energy = 0.77
 fog_density = 1.0
-fog_sky_affect = 0.0
-fog_depth_curve = 0.0625001
-fog_depth_end = 200.0
+fog_depth_curve = 0.353554
+fog_depth_end = 114.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2337y"]
 resource_local_to_scene = true
@@ -61,13 +48,18 @@ viewport_path = NodePath("InstructJump/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_2337y"]
 viewport_path = NodePath("InstructCrouch/SubViewport")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gm6ol"]
+transparency = 1
+albedo_color = Color(0.579691, 0.579691, 0.579691, 1)
+
 [node name="BaseMap" instance=ExtResource("1_q213a")]
 
 [node name="DirectionalLight3D" parent="." index="0"]
+layers = 0
 shadow_enabled = false
 
 [node name="WorldEnvironment" parent="." index="1"]
-environment = SubResource("Environment_50mgq")
+environment = SubResource("Environment_fwf7s")
 
 [node name="BaseMapGeometry" parent="." index="2"]
 process_mode = 4
@@ -163,10 +155,8 @@ height = 1.04883
 [node name="SpawnLight" parent="." index="6" instance=ExtResource("3_x7mfr")]
 transform = Transform3D(1, 0, 0, 0, 0.680874, 0.7324, 0, -0.7324, 0.680874, -0.51826, 81.1897, 61.429)
 light_energy = 11.891
-light_bake_mode = 1
 shadow_normal_bias = 2.781
 shadow_reverse_cull_face = true
-shadow_caster_mask = 4294967293
 spot_range = 124.916
 spot_angle = 2.57
 spot_angle_attenuation = 0.318642
@@ -217,13 +207,13 @@ theme_override_font_sizes/font_size = 32
 text = "Press CTRL to Crouch"
 
 [node name="Pointer" parent="." index="10" instance=ExtResource("3_x7mfr")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -56.2419, 41.6996, -17.3768)
-light_energy = 13.79
-shadow_enabled = true
-shadow_reverse_cull_face = true
-shadow_caster_mask = 4294967293
-spot_range = 153.453
+transform = Transform3D(-4.28519e-08, 0.197332, -0.980337, 8.62567e-09, 0.980337, 0.197332, 1, 0, -4.37114e-08, -26.2247, 41.3864, -17.3768)
+light_energy = 100.0
+light_specular = 1.136
+spot_range = 130.503
+spot_attenuation = 0.0
 spot_angle = 21.9095
+spot_angle_attenuation = 0.707111
 
 [node name="Platforms" type="Node" parent="." index="11"]
 
@@ -258,6 +248,7 @@ size = Vector3(14, 1, 52.789)
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.313, 9.235, -28.323)
 use_collision = true
 size = Vector3(10.031, 14.695, 46.924)
+material = SubResource("StandardMaterial3D_gm6ol")
 
 [node name="SpawnWall3" type="CSGBox3D" parent="Platforms" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1347, 7.99164, -1.23174)
