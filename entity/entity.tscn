@@ -1,12 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://bc7to0a8a87hx"]
+[gd_scene load_steps=9 format=3 uid="uid://bc7to0a8a87hx"]
 
 [ext_resource type="Script" uid="uid://c4xftn6sbf0y6" path="res://entity/entity.gd" id="1_bclhr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bclhr"]
 size = Vector3(0.5, 2, 0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bclhr"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0, 1, 1, 0.1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bclhr"]
+radius = 0.25
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_mckvm"]
 size = Vector3(0.5, 1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mckvm"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.984, 0.875, 0, 0.1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mckvm"]
+radius = 0.25
+height = 1.0
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_bclhr"]
+length = 0.01
 
 [node name="Entity" type="CharacterBody3D"]
 disable_mode = 1
@@ -17,6 +37,7 @@ floor_constant_speed = true
 floor_max_angle = 1.0472
 floor_snap_length = 1.0
 platform_on_leave = 1
+safe_margin = 0.01
 script = ExtResource("1_bclhr")
 jump_force = 24.0
 
@@ -34,9 +55,56 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.849638, -1)
 
 [node name="DefaultCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_bclhr")
+disabled = true
+debug_color = Color(0, 0, 1, 0.560784)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="DefaultCollision"]
+size = Vector3(0.5, 2, 0.5)
+material = SubResource("StandardMaterial3D_bclhr")
+
+[node name="DefaultCollisionSphere" type="CollisionShape3D" parent="."]
+visible = false
+shape = SubResource("CapsuleShape3D_bclhr")
+disabled = true
 debug_color = Color(0, 0, 1, 0.560784)
 
 [node name="CrouchCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_mckvm")
+disabled = true
 debug_color = Color(0.72853, 0.474321, 0, 0.42)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CrouchCollision"]
+size = Vector3(0.5, 1, 0.5)
+material = SubResource("StandardMaterial3D_mckvm")
+
+[node name="CrouchCollisionSphere" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+shape = SubResource("CapsuleShape3D_mckvm")
+disabled = true
+debug_color = Color(0.72853, 0.474321, 0, 0.42)
+
+[node name="FloorSeperation1" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.26, -1, 0.26)
+shape = SubResource("SeparationRayShape3D_bclhr")
+disabled = true
+debug_color = Color(0.923283, 0.248184, 0.31823, 0.42)
+
+[node name="FloorSeperation2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.26, -1, 0.26)
+shape = SubResource("SeparationRayShape3D_bclhr")
+disabled = true
+debug_color = Color(0.923283, 0.248184, 0.31823, 0.42)
+
+[node name="FloorSeperation3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.26, -1, -0.26)
+shape = SubResource("SeparationRayShape3D_bclhr")
+disabled = true
+debug_color = Color(0.923283, 0.248184, 0.31823, 0.42)
+
+[node name="FloorSeperation4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.26, -1, -0.26)
+shape = SubResource("SeparationRayShape3D_bclhr")
+disabled = true
+debug_color = Color(0.923283, 0.248184, 0.31823, 0.42)
