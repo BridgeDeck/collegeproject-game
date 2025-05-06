@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwuightqiopbw"]
+[gd_scene load_steps=4 format=3 uid="uid://cwuightqiopbw"]
 
 [ext_resource type="Script" uid="uid://o1opesx4ssd2" path="res://props/lights/visual_spotlight.gd" id="1_iff7n"]
+[ext_resource type="Texture2D" uid="uid://qcc50rsl2nn8" path="res://light_glare.png" id="2_h35eo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iff7n"]
 transparency = 1
@@ -25,7 +26,20 @@ transform = Transform3D(1, 0, 0, 0, -8.9407e-08, -1, 0, 1, -8.9407e-08, 0, 0, -5
 layers = 2
 cast_shadow = 0
 gi_mode = 2
-radius = 19.574
+radius = 19.5739
 height = 106.0
+sides = 12
 cone = true
 material = SubResource("StandardMaterial3D_iff7n")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+cast_shadow = 0
+gi_mode = 0
+modulate = Color(1, 1, 0.34902, 1)
+pixel_size = 0.0002
+billboard = 1
+double_sided = false
+fixed_size = true
+texture_filter = 0
+texture = ExtResource("2_h35eo")
