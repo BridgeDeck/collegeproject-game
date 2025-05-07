@@ -1,0 +1,44 @@
+@tool
+extends Control
+class_name HudElements
+
+@export_range(0.0, 1.0) var dash_allowance_indication_progress:float = 0.0
+@export_range(0.0, 1.0) var dash_allowance_indication_minimum:float = 0.5
+@export_color_no_alpha var dash_allowance_indication_full:Color = Color(0.178, 0.997, 0.966)
+@export_color_no_alpha var dash_allowance_indication_partial:Color = Color(0.971, 0.89, 0.0)
+@export_color_no_alpha var dash_allowance_indication_invalid:Color = Color(0.851, 0.0, 0.132)
+
+@export var overall_velocity:float = 0.0
+@export var horizontal_velocity:float = 0.0
+@export var vertical_velocity:float = 0.0
+
+static func round_to_dec(num, digit):
+    return round(num * pow(10.0, digit)) / pow(10.0, digit)
+
+func _ready() -> void:
+    # var vtexture:ViewportTexture = $TextureRect/SubViewport.get_texture()
+    
+    # $TextureRect.texture = ImageTexture.create_from_image(vtexture.get_image())
+    return
+
+func _process(delta: float) -> void:
+    if not visible:
+        return
+    $DashAllowanceIndication/ColorRect.anchor_right = dash_allowance_indication_progress
+    $DashAllowanceIndication/Label.text = str(roundi(dash_allowance_indication_progress * 100.0)) + "%"
+    if dash_allowance_indication_progress < dash_allowance_indication_minimum:
+        $DashAllowanceIndication/ColorRect.color = $DashAllowanceIndication/ColorRect.color.lerp(dash_allowance_indication_invalid, 0.5)
+        $DashAllowanceIndication/Label.add_theme_color_override("font_color", dash_allowance_indication_invalid)
+    elif is_equal_approx(dash_allowance_indication_progress, 1.0):
+        $DashAllowanceIndication/ColorRect.color = $DashAllowanceIndication/ColorRect.color.lerp(dash_allowance_indication_full, 0.1)
+        $DashAllowanceIndication/Label.add_theme_color_override("font_color", dash_allowance_indication_full)
+    elif dash_allowance_indication_progress > dash_allowance_indication_minimum:
+        $DashAllowanceIndication/ColorRect.color = $DashAllowanceIndication/ColorRect.color.lerp(dash_allowance_indication_partial, 0.3)
+        $DashAllowanceIndication/Label.add_theme_color_override("font_color", dash_allowance_indication_partial)
+
+    
+    $Accelerometer/Overall/Value.text = str(absf(round_to_dec(overall_velocity, 2)))
+    $Accelerometer/Horizontal/Value.text = str(absf(round_to_dec(horizontal_velocity, 2)))
+    $Accelerometer/Vertical/Value.text = str(round_to_dec(vertical_velocity,2))
+    
+    

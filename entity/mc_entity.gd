@@ -32,6 +32,22 @@ static func generate_player_action_flag(jump:bool,
 	
 	return flags
 
+func _ready() -> void:
+	super._ready()
+	dash_allowance = max_dash_allowance
+func _process(delta: float) -> void:
+	var space = PhysicsServer3D.space_get_direct_state(get_world_3d().space)
+	var query = PhysicsRayQueryParameters3D.new()
+	query.exclude.append(self.get_rid())
+	query.collision_mask = 1<<0
+	query.from = global_position
+	query.to = global_position - (up_direction * 100)
+
+	var result = space.intersect_ray(query)
+	if result:
+		$ShadowPivot.global_position = result["position"]
+		$ShadowPivot.global_basis = Basis.looking_at(result["normal"], Vector3.UP)
+
 func _physics_process(delta: float) -> void:
 	var true_previous_action = action_previous
 	super._physics_process(delta)

@@ -22,6 +22,7 @@ LoadingScreen="*res://autoloads/loading_screen/autoload.gd"
 LocalPlayer="*res://autoloads/local_player.gd"
 LocalLoadingScreen="*res://autoloads/loading_screen/autoload.gd"
 LocalMainMenu="*res://ui/main_menu/autoload.gd"
+LocalHUD="*res://ui/hud/autoload.gd"
 
 [input]
 

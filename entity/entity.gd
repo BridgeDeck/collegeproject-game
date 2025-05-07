@@ -51,6 +51,11 @@ func _ready() -> void:
 	if not Engine.is_editor_hint():
 		$CrouchCollision/CSGBox3D.queue_free()
 		$CrouchCollision/CSGBox3D.queue_free()
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	
+	pass
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():

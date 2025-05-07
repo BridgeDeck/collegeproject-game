@@ -1,12 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://2nkpcd1p6e51"]
+[gd_scene load_steps=7 format=3 uid="uid://2nkpcd1p6e51"]
 
 [ext_resource type="PackedScene" uid="uid://bc7to0a8a87hx" path="res://entity/entity.tscn" id="1_7n7gl"]
 [ext_resource type="Script" uid="uid://d3uodsfw4kl3m" path="res://entity/mc_entity.gd" id="2_5vndw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7n7gl"]
+resource_local_to_scene = true
+size = Vector3(0.5, 2, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7n7gl"]
 resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0, 1, 1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5vndw"]
+resource_local_to_scene = true
+size = Vector3(0.5, 1, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vndw"]
 resource_local_to_scene = true
@@ -14,6 +22,7 @@ transparency = 1
 albedo_color = Color(0.984, 0.875, 0, 0.1)
 
 [node name="MainCharacterEntity" instance=ExtResource("1_7n7gl")]
+platform_on_leave = 2
 safe_margin = 0.1
 script = ExtResource("2_5vndw")
 max_dash_allowance = 1.0
@@ -26,8 +35,41 @@ air_speed_modifier = 0.01
 [node name="LookFromUncrouched" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.948231, 0)
 
+[node name="DefaultCollision" parent="." index="4"]
+shape = SubResource("BoxShape3D_7n7gl")
+
 [node name="CSGBox3D" parent="DefaultCollision" index="0"]
+layers = 128
 material = SubResource("StandardMaterial3D_7n7gl")
 
+[node name="CrouchCollision" parent="." index="6"]
+shape = SubResource("BoxShape3D_5vndw")
+
 [node name="CSGBox3D" parent="CrouchCollision" index="0"]
+visible = false
+layers = 128
 material = SubResource("StandardMaterial3D_5vndw")
+
+[node name="ShadowPivot" type="Node3D" parent="." index="12"]
+visible = false
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="ShadowPivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+radius = 0.3
+height = 0.01
+
+[node name="Sprite3D" type="Sprite3D" parent="ShadowPivot" index="1"]
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="13"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
+light_energy = 16.0
+light_specular = 0.0
+light_bake_mode = 0
+light_cull_mask = 4294967293
+spot_range = 50.0
+spot_attenuation = -1.0
+spot_angle = 10.0
+spot_angle_attenuation = 0.00018379
