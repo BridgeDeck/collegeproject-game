@@ -7,12 +7,14 @@ const FLAG_ACTION1 = 1<<2
 const FLAG_ACTION2 = 1<<3
 const FLAG_ACTION3 = 1<<4
 
-@export var speed:float = 18
+@export var walk_speed:float = 18
 @export var jump_force:float = 8
 @export var acceleration:float = 18*3
 @export var air_speed_modifier:float = 1.0
 @export var max_jump_count:int = 1
+@export var crouch_speed:float = 9
 
+var current_speed = 18
 var jump_count:int = max_jump_count
 var action_previous:int
 var action:int
@@ -24,11 +26,13 @@ var force:Vector3
 # var previous_velocity:Vector3
 # var walljump_impulse:Vector3
 
-func add_force(applyforce:Vector3, vertical_only:bool):
-	if vertical_only:
+## applies a force to this entity to move.
+## usually you only want an entity to move horizontally, which is what `vertical_only` is for.
+func add_force(applyforce:Vector3, horizontal_only:bool):
+	if horizontal_only:
 		applyforce = applyforce - (applyforce*up_direction)
 	
-	self.force  = applyforce * speed
+	self.force  = applyforce * current_speed
 
 func player_input(
 	movement_dir:Vector2,
@@ -37,8 +41,11 @@ func player_input(
 	equip:int
 ):
 	action = actionflags
-	add_force((camera_basis * Vector3(movement_dir.x, 0, movement_dir.y)).slide(up_direction).normalized(),false)
+	var vertdirection = (camera_basis * Vector3(movement_dir.x, 0, movement_dir.y)).slide(up_direction).normalized()
+	add_force(vertdirection,false)
 	equipped = equip
+
+	$LookAt.global_position = $LookFrom.global_position + -camera_basis.z
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
@@ -55,10 +62,12 @@ func _physics_process(delta: float) -> void:
 		$DefaultCollision.disabled = true
 		$CrouchCollision.disabled = false
 		$LookFrom.position = $LookFromCrouched.position
+		current_speed = crouch_speed
 	else:
 		$DefaultCollision.disabled = false
 		$CrouchCollision.disabled = true
 		$LookFrom.position = $LookFromUncrouched.position
+		current_speed = walk_speed
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -71,8 +80,6 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		modifiers -= air_speed_modifier
 	
-	# Cannot add momentum midair, but you can redirect it
-	# if is_on_floor():
 	velocity = (velocity - velocity*up_direction).move_toward(force, acceleration*delta*modifiers) + velocity*up_direction
 
 	# a pathetic implementation of walljumping, do we even want wall jumping? or are midair jumps fine.
