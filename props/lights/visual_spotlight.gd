@@ -1,7 +1,7 @@
 @tool
 extends SpotLight3D
 
-@export var visual_light_transparency:float = 0.2
+@export_range(0.0, 1.0) var visual_light_transparency:float = 0.2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,3 +17,4 @@ func _process(delta: float) -> void:
 	$CSGCylinder3D.radius = cone_offset.y
 	$CSGCylinder3D.material.albedo_color = light_color
 	$CSGCylinder3D.material.albedo_color.a = visual_light_transparency
+	$Sprite3D.modulate = light_color

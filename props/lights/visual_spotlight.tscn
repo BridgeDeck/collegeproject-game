@@ -1,33 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwuightqiopbw"]
+[gd_scene load_steps=4 format=3 uid="uid://cwuightqiopbw"]
 
 [ext_resource type="Script" uid="uid://o1opesx4ssd2" path="res://props/lights/visual_spotlight.gd" id="1_iff7n"]
 [ext_resource type="Texture2D" uid="uid://qcc50rsl2nn8" path="res://light_glare.png" id="2_h35eo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iff7n"]
+resource_local_to_scene = true
 transparency = 1
 cull_mode = 2
 shading_mode = 0
 disable_ambient_light = true
 disable_fog = true
-albedo_color = Color(1, 1, 0.317647, 0.25)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h35eo"]
-disable_ambient_light = true
-disable_fog = true
+albedo_color = Color(1, 1, 1, 0.2)
 
 [node name="VisualSpotlight" type="SpotLight3D"]
-light_color = Color(1, 1, 0.317647, 1)
-light_energy = 1.19
 light_specular = 2.346
 light_bake_mode = 1
 light_cull_mask = 4294967293
 shadow_caster_mask = 4294967293
 spot_range = 106.0
-spot_attenuation = -1.0
 spot_angle = 10.6413
 spot_angle_attenuation = 0.196147
 script = ExtResource("1_iff7n")
-visual_light_transparency = 0.25
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -8.9407e-08, -1, 0, 1, -8.9407e-08, 0, 0, -53)
@@ -37,16 +30,14 @@ calculate_tangents = false
 flip_faces = true
 radius = 19.5739
 height = 106.0
-sides = 12
+sides = 32
 cone = true
 material = SubResource("StandardMaterial3D_iff7n")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
-material_overlay = SubResource("StandardMaterial3D_h35eo")
 cast_shadow = 0
 gi_mode = 0
-modulate = Color(1, 1, 0.34902, 1)
 pixel_size = 0.0002
 billboard = 1
 double_sided = false
