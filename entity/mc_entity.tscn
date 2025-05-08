@@ -25,12 +25,13 @@ albedo_color = Color(0.984, 0.875, 0, 0.1)
 platform_on_leave = 2
 safe_margin = 0.1
 script = ExtResource("2_5vndw")
-max_dash_allowance = 1.0
-dash_regeneration = 0.75
-dash_duration = 0.2
-dash_speed = 36.0
-acceleration = 64.0
-air_speed_modifier = 0.01
+max_dash_allowance = 3.0
+dash_regeneration = 0.6
+dash_duration = 0.1
+dash_speed = 72.0
+slam_speed = 80.0
+acceleration = 96.0
+crouch_speed = 6.0
 
 [node name="LookFromUncrouched" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.948231, 0)

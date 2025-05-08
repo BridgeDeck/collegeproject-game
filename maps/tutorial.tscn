@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cndtksx034aae"]
+[gd_scene load_steps=22 format=3 uid="uid://cndtksx034aae"]
 
 [ext_resource type="PackedScene" uid="uid://bq8r8yk47xi2m" path="res://maps/base_map.tscn" id="1_q213a"]
 [ext_resource type="Script" uid="uid://cu1fkvcsy4wfx" path="res://maps/tutorial.gd" id="2_x7mfr"]
@@ -37,28 +37,6 @@ metallic_specular = 0.51
 emission_enabled = true
 emission = Color(0.787461, 1, 0.266925, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2337y"]
-size = Vector3(17.97, 1, 7.72388)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58lna"]
-emission_enabled = true
-emission = Color(2.31028e-06, 0.675114, 0.574202, 1)
-emission_energy_multiplier = 3.29
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_50mgq"]
-viewport_path = NodePath("ObstacleCourse/Platform1/Sprite3D/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gvda"]
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.601223, 0.601223, 0.601223, 0.478)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqkom"]
-albedo_color = Color(0.933831, 0.784326, 0.095294, 1)
-emission_enabled = true
-emission = Color(0.933831, 0.784326, 0.095294, 1)
-emission_energy_multiplier = 1.23
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ju2a6"]
 disable_fog = true
 albedo_color = Color(0.89462, 0.689682, 0, 1)
@@ -78,18 +56,42 @@ shading_mode = 0
 albedo_color = Color(1, 1, 1, 0.417)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_x7mfr"]
-viewport_path = NodePath("ObstacleCourse/Tutorial/InstructJump/SubViewport")
+viewport_path = NodePath("Tutorial/InstructJump/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2337y"]
-viewport_path = NodePath("ObstacleCourse/Tutorial/InstructCrouch/SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_21o1g"]
+viewport_path = NodePath("Tutorial/InstructCrouch/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6v04"]
 disable_fog = true
 albedo_color = Color(1, 0, 0, 1)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_2337y"]
+viewport_path = NodePath("Tutorial/InstructMidairGlide/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2337y"]
+size = Vector3(17.97, 1, 7.72388)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58lna"]
+emission_enabled = true
+emission = Color(0.233456, 1, 0.861531, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_50mgq"]
+viewport_path = NodePath("ObstacleCourse/Platform1/InstructDash/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gvda"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.601223, 0.601223, 0.601223, 0.478)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqkom"]
+albedo_color = Color(0.933831, 0.784326, 0.095294, 1)
+emission_enabled = true
+emission = Color(0.933831, 0.784326, 0.095294, 1)
+emission_energy_multiplier = 1.23
+
 [node name="Tutorial" instance=ExtResource("1_q213a")]
 script = ExtResource("2_x7mfr")
-elevator_progress = 2.5
+elevator_progress = 0.0
 
 [node name="DirectionalLight3D" parent="." index="0"]
 layers = 0
@@ -211,10 +213,124 @@ spot_attenuation = 0.0
 spot_angle = 21.9095
 spot_angle_attenuation = 0.707111
 
-[node name="ObstacleCourse" type="Node" parent="." index="8"]
+[node name="Tutorial" type="Node" parent="." index="8"]
+
+[node name="SpawnWall" type="CSGBox3D" parent="Tutorial" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5968, 13.0351, -1.20231)
+use_collision = true
+size = Vector3(2.89551, 26.6074, 47.2043)
+
+[node name="JumpTutorial" type="CSGBox3D" parent="Tutorial" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60319, 2.92279, 4)
+use_collision = true
+collision_mask = 0
+size = Vector3(24.4214, 6.84558, 1)
+material = SubResource("StandardMaterial3D_ju2a6")
+
+[node name="CrouchTutorial" type="CSGBox3D" parent="Tutorial" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63404, 9.69766, 12.9999)
+use_collision = true
+collision_mask = 0
+size = Vector3(22.5786, 15.6494, 1)
+material = SubResource("StandardMaterial3D_lfi8r")
+
+[node name="SpawnWall2" type="CSGBox3D" parent="Tutorial" index="3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.551482, 13.162, -24.3016)
+use_collision = true
+size = Vector3(1.98816, 26.4917, 21.401)
+material = SubResource("StandardMaterial3D_gm6ol")
+
+[node name="SpawnWall3" type="CSGBox3D" parent="Tutorial" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1347, 13.1765, -1.23174)
+use_collision = true
+size = Vector3(2.53796, 26.3901, 46.8277)
+
+[node name="Window" type="CSGBox3D" parent="Tutorial" index="5"]
+transform = Transform3D(1, 0, 0, 0, 0.645858, -0.763458, 0, 0.763458, 0.645858, -0.834959, 18.1511, -2.27722)
+use_collision = true
+size = Vector3(10.791, 1, 17.2558)
+material = SubResource("StandardMaterial3D_tbce6")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Tutorial" index="6"]
+transform = Transform3D(1, 0, 0, 0, 0.645858, -0.763458, 0, 0.763458, 0.645858, -0.759886, 18.1347, -2.22445)
+use_collision = true
+size = Vector3(19.4519, 1.26416, 20.969)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Tutorial/CSGBox3D2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.123535, 9.53674e-07)
+operation = 2
+size = Vector3(10.791, 3.2334, 17.2558)
+
+[node name="InstructJump" type="Sprite3D" parent="Tutorial" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_x7mfr")
+
+[node name="SubViewport" type="SubViewport" parent="Tutorial/InstructJump" index="0"]
+transparent_bg = true
+size = Vector2i(317, 44)
+
+[node name="Label" type="Label" parent="Tutorial/InstructJump/SubViewport" index="0"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Press SPACE to Jump"
+
+[node name="InstructCrouch" type="Sprite3D" parent="Tutorial" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, 8)
+billboard = 1
+texture = SubResource("ViewportTexture_21o1g")
+
+[node name="SubViewport" type="SubViewport" parent="Tutorial/InstructCrouch" index="0"]
+transparent_bg = true
+size = Vector2i(332, 44)
+
+[node name="Label" type="Label" parent="Tutorial/InstructCrouch/SubViewport" index="0"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Press CTRL to Crouch"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Tutorial" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52771, 0, 13.6059)
+size = Vector3(19.4768, 1, 18.3328)
+material = SubResource("StandardMaterial3D_m6v04")
+
+[node name="CrouchIndicator" parent="Tutorial" index="10" instance=ExtResource("3_x7mfr")]
+transform = Transform3D(1, 0, 0, 0, 0.912955, 0.408059, 0, -0.408059, 0.912955, -1.90735e-06, 12.7488, 60.4062)
+light_energy = 11.836
+spot_range = 56.4068
+spot_attenuation = 0.0
+spot_angle_attenuation = 0.0140821
+visual_light_transparency = 0.15
+
+[node name="InstructMidairGlide" type="Sprite3D" parent="Tutorial" index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.26514, 5, 21.6066)
+billboard = 1
+texture = SubResource("ViewportTexture_2337y")
+
+[node name="SubViewport" type="SubViewport" parent="Tutorial/InstructMidairGlide" index="0"]
+transparent_bg = true
+size = Vector2i(502, 234)
+
+[node name="Label" type="Label" parent="Tutorial/InstructMidairGlide/SubViewport" index="0"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Mind your step.
+You can redirect your horizontal
+velocity midair, but 
+not increase it beyond 1, 
+so don't turn too tight."
+horizontal_alignment = 1
+
+[node name="ObstacleCourse" type="Node" parent="." index="9"]
 
 [node name="Elevator" type="AnimatableBody3D" parent="ObstacleCourse" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.1502, 27.1337)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.365717, 27.1337)
 collision_mask = 0
 input_ray_pickable = false
 
@@ -238,21 +354,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8266, 30.5458, 26.4518)
 use_collision = true
 size = Vector3(17.7231, 1, 8.09314)
 
-[node name="Sprite3D" type="Sprite3D" parent="ObstacleCourse/Platform1" index="0"]
+[node name="InstructDash" type="Sprite3D" parent="ObstacleCourse/Platform1" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.49964, 4.88724, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_50mgq")
 
-[node name="SubViewport" type="SubViewport" parent="ObstacleCourse/Platform1/Sprite3D" index="0"]
+[node name="SubViewport" type="SubViewport" parent="ObstacleCourse/Platform1/InstructDash" index="0"]
 transparent_bg = true
-size = Vector2i(312, 47)
+size = Vector2i(642, 232)
 
-[node name="Label" type="Label" parent="ObstacleCourse/Platform1/Sprite3D/SubViewport" index="0"]
+[node name="Label" type="Label" parent="ObstacleCourse/Platform1/InstructDash/SubViewport" index="0"]
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 32
-text = "Press SHIFT to Dash"
+text = "Press SHIFT to Dash
+Can be used to instantly redirect yourself 
+on the ground or in the air, 
+but use it wisely as you only 
+have 3 uses at most."
+horizontal_alignment = 1
 
 [node name="Seperator" type="CSGBox3D" parent="ObstacleCourse" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7942, 39.6176, 21.5673)
@@ -271,99 +392,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.8973
 use_collision = true
 size = Vector3(18.3012, 17.9571, 2.14014)
 
-[node name="Tutorial" type="Node" parent="ObstacleCourse" index="5"]
-
-[node name="SpawnWall" type="CSGBox3D" parent="ObstacleCourse/Tutorial" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5968, 13.0351, -1.20231)
-use_collision = true
-size = Vector3(2.89551, 26.6074, 47.2043)
-
-[node name="JumpTutorial" type="CSGBox3D" parent="ObstacleCourse/Tutorial" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60319, 2.92279, 4)
-use_collision = true
-collision_mask = 0
-size = Vector3(24.4214, 6.84558, 1)
-material = SubResource("StandardMaterial3D_ju2a6")
-
-[node name="CrouchTutorial" type="CSGBox3D" parent="ObstacleCourse/Tutorial" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63404, 9.69766, 12.9999)
-use_collision = true
-collision_mask = 0
-size = Vector3(22.5786, 15.6494, 1)
-material = SubResource("StandardMaterial3D_lfi8r")
-
-[node name="SpawnWall2" type="CSGBox3D" parent="ObstacleCourse/Tutorial" index="3"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.551482, 13.162, -24.3016)
-use_collision = true
-size = Vector3(1.98816, 26.4917, 21.401)
-material = SubResource("StandardMaterial3D_gm6ol")
-
-[node name="SpawnWall3" type="CSGBox3D" parent="ObstacleCourse/Tutorial" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1347, 13.1765, -1.23174)
-use_collision = true
-size = Vector3(2.53796, 26.3901, 46.8277)
-
-[node name="Window" type="CSGBox3D" parent="ObstacleCourse/Tutorial" index="5"]
-transform = Transform3D(1, 0, 0, 0, 0.645858, -0.763458, 0, 0.763458, 0.645858, -0.834959, 18.1511, -2.27722)
-use_collision = true
-size = Vector3(10.791, 1, 17.2558)
-material = SubResource("StandardMaterial3D_tbce6")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="ObstacleCourse/Tutorial" index="6"]
-transform = Transform3D(1, 0, 0, 0, 0.645858, -0.763458, 0, 0.763458, 0.645858, -0.759886, 18.1347, -2.22445)
-use_collision = true
-size = Vector3(19.4519, 1.26416, 20.969)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="ObstacleCourse/Tutorial/CSGBox3D2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.123535, 9.53674e-07)
-operation = 2
-size = Vector3(10.791, 3.2334, 17.2558)
-
-[node name="InstructJump" type="Sprite3D" parent="ObstacleCourse/Tutorial" index="7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0)
-billboard = 1
-texture = SubResource("ViewportTexture_x7mfr")
-
-[node name="SubViewport" type="SubViewport" parent="ObstacleCourse/Tutorial/InstructJump" index="0"]
-transparent_bg = true
-size = Vector2i(317, 44)
-
-[node name="Label" type="Label" parent="ObstacleCourse/Tutorial/InstructJump/SubViewport" index="0"]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Press SPACE to Jump"
-
-[node name="InstructCrouch" type="Sprite3D" parent="ObstacleCourse/Tutorial" index="8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, 8)
-billboard = 1
-texture = SubResource("ViewportTexture_2337y")
-
-[node name="SubViewport" type="SubViewport" parent="ObstacleCourse/Tutorial/InstructCrouch" index="0"]
-transparent_bg = true
-size = Vector2i(332, 44)
-
-[node name="Label" type="Label" parent="ObstacleCourse/Tutorial/InstructCrouch/SubViewport" index="0"]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Press CTRL to Crouch"
-
-[node name="CSGBox3D" type="CSGBox3D" parent="ObstacleCourse/Tutorial" index="9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52771, 0, 13.6059)
-size = Vector3(19.4768, 1, 18.3328)
-material = SubResource("StandardMaterial3D_m6v04")
-
-[node name="CrouchIndicator" parent="ObstacleCourse/Tutorial" index="10" instance=ExtResource("3_x7mfr")]
-transform = Transform3D(1, 0, 0, 0, 0.912955, 0.408059, 0, -0.408059, 0.912955, -1.90735e-06, 12.7488, 60.4062)
-light_energy = 144.989
-spot_range = 56.4068
-spot_attenuation = 0.0
-visual_light_transparency = 0.218
-
-[node name="MainCharacterEntity" parent="." index="9" instance=ExtResource("4_2337y")]
+[node name="MainCharacterEntity" parent="." index="10" instance=ExtResource("4_2337y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0541296, 4.15136, -17.217)
-max_dash_allowance = 3.0
-dash_regeneration = 0.7
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="11"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.285204, 16.7235)
+omni_range = 20.6498

@@ -2,7 +2,7 @@
 extends Control
 class_name HudElements
 
-@export_range(0.0, 1.0) var dash_allowance_indication_progress:float = 0.0
+@export_range(0.0, 1.0) var dash_allowance_indication_progress:float = 1.0
 @export_range(0.0, 1.0) var dash_allowance_indication_minimum:float = 0.5
 @export_color_no_alpha var dash_allowance_indication_full:Color = Color(0.178, 0.997, 0.966)
 @export_color_no_alpha var dash_allowance_indication_partial:Color = Color(0.971, 0.89, 0.0)
@@ -11,6 +11,9 @@ class_name HudElements
 @export var overall_velocity:float = 0.0
 @export var horizontal_velocity:float = 0.0
 @export var vertical_velocity:float = 0.0
+
+@export var health_max:float = 100
+@export var health_current:float = 100
 
 static func round_to_dec(num, digit):
     return round(num * pow(10.0, digit)) / pow(10.0, digit)
@@ -40,5 +43,10 @@ func _process(delta: float) -> void:
     $Accelerometer/Overall/Value.text = str(absf(round_to_dec(overall_velocity, 2)))
     $Accelerometer/Horizontal/Value.text = str(absf(round_to_dec(horizontal_velocity, 2)))
     $Accelerometer/Vertical/Value.text = str(round_to_dec(vertical_velocity,2))
+
+    health_current = clampf(health_current, 0, health_max)
+    $Healthbar/Bar.anchor_right = clampf(health_current/health_max, 0.03, 1.0)
+    $Healthbar/MaxHealth.text = str(round_to_dec(health_max,2))
+    $Healthbar/Bar/Label.text = str(round_to_dec(health_current,2))
     
     

@@ -22,7 +22,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7t8nt"]
-viewport_path = NodePath("TextureRect/SubViewport")
+viewport_path = NodePath("Crosshair/SubViewport")
 
 [node name="HudElements" type="Control"]
 layout_mode = 3
@@ -32,7 +32,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7t8nt")
-dash_allowance_indication_progress = 1.0
 
 [node name="DashAllowanceIndication" type="Panel" parent="."]
 layout_mode = 1
@@ -143,7 +142,7 @@ theme_type_variation = &"HorizontalSpeedLabel"
 text = "0.0"
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Crosshair" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -154,11 +153,11 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_7t8nt")
 
-[node name="SubViewport" type="SubViewport" parent="TextureRect"]
+[node name="SubViewport" type="SubViewport" parent="Crosshair"]
 transparent_bg = true
 size = Vector2i(32, 32)
 
-[node name="Vert" type="ColorRect" parent="TextureRect/SubViewport"]
+[node name="Vert" type="ColorRect" parent="Crosshair/SubViewport"]
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
@@ -167,7 +166,7 @@ offset_left = -1.0
 offset_right = 1.0
 color = Color(0.90939, 0.90939, 0.90939, 1)
 
-[node name="Hori" type="ColorRect" parent="TextureRect/SubViewport"]
+[node name="Hori" type="ColorRect" parent="Crosshair/SubViewport"]
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -175,3 +174,53 @@ anchor_bottom = 0.5
 offset_top = -1.0
 offset_bottom = 1.0
 color = Color(0.90939, 0.90939, 0.90939, 1)
+
+[node name="Healthbar" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.35
+anchor_top = 0.9
+anchor_right = 0.6
+anchor_bottom = 0.95
+
+[node name="BG" type="ColorRect" parent="Healthbar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.538)
+
+[node name="MaxHealth" type="Label" parent="Healthbar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -28.0
+offset_top = -24.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0.547868, 0, 0.0286993, 1)
+theme_override_constants/outline_size = 5
+text = "100.0"
+
+[node name="Bar" type="ColorRect" parent="Healthbar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.876242, 0.0510758, 8.66354e-07, 1)
+
+[node name="Label" type="Label" parent="Healthbar/Bar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_top = -24.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.876242, 0.0510758, 8.66354e-07, 1)
+text = "100.0"

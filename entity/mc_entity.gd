@@ -9,6 +9,10 @@ class_name MainCharacterEntity
 @export var dash_duration:float = 0.2
 @export var dash_speed:float = 18*2
 
+# @export var slam_direction:Vector3 = Vector3.DOWN
+@export var slam_speed:float = 80.0
+
+var current_slam_direction:Vector3 = Vector3()
 var dash_allowance:float = max_dash_allowance
 
 var current_dash_duration:float = 0.0
@@ -35,29 +39,19 @@ static func generate_player_action_flag(jump:bool,
 func _ready() -> void:
 	super._ready()
 	dash_allowance = max_dash_allowance
-func _process(delta: float) -> void:
-	var space = PhysicsServer3D.space_get_direct_state(get_world_3d().space)
-	var query = PhysicsRayQueryParameters3D.new()
-	query.exclude.append(self.get_rid())
-	query.collision_mask = 1<<0
-	query.from = global_position
-	query.to = global_position - (up_direction * 100)
-
-	var result = space.intersect_ray(query)
-	if result:
-		$ShadowPivot.global_position = result["position"]
-		$ShadowPivot.global_basis = Basis.looking_at(result["normal"], Vector3.UP)
 
 func _physics_process(delta: float) -> void:
-	var true_previous_action = action_previous
-	super._physics_process(delta)
-	action_previous = true_previous_action
+	if Engine.is_editor_hint():
+		return
+	
+	_entity_physics_process(delta)
 	if (action_previous & FLAG_DASH) != FLAG_DASH \
 		and (action & FLAG_DASH) == FLAG_DASH \
 		and dash_allowance >= 1.0:
 		dash_allowance -= 1.0
 		current_dash_duration = dash_duration
 		current_dash_direction = force.normalized()
+		current_slam_direction = Vector3.ZERO
 	else:
 		dash_allowance = clampf(dash_allowance + dash_regeneration * delta, 0.0, max_dash_allowance)
 	
@@ -69,9 +63,23 @@ func _physics_process(delta: float) -> void:
 		
 	elif prevdash_duration > 0.0 and !is_zero_approx(prevdash_duration):
 		prevdash_duration = 0.0
-		velocity = Vector3()
+		velocity = force
 		motion_mode = CharacterBody3D.MOTION_MODE_GROUNDED
 		current_dash_direction = Vector3()
+
+	if (action_previous & FLAG_CROUCH) != FLAG_CROUCH \
+		and (action & FLAG_CROUCH) == FLAG_CROUCH \
+		and not is_on_floor():
+			current_slam_direction = -up_direction
+	if not current_slam_direction.is_zero_approx():
+		if is_on_floor():
+			current_slam_direction = Vector3()
+		else:
+			velocity = current_slam_direction * slam_speed
+	else:
+		_entity_crouch_checking(delta)
 	
+	move_and_slide()
+
 	action_previous = action
 

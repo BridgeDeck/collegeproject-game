@@ -24,6 +24,11 @@ LocalLoadingScreen="*res://autoloads/loading_screen/autoload.gd"
 LocalMainMenu="*res://ui/main_menu/autoload.gd"
 LocalHUD="*res://ui/hud/autoload.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
 [input]
 
 forward={

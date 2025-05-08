@@ -10,7 +10,7 @@ const FLAG_ACTION3 = 1<<4
 @export var walk_speed:float = 18
 @export var jump_force:float = 8
 @export var acceleration:float = 18*3
-@export var air_speed_modifier:float = 1.0
+# @export var air_speed_modifier:float = 1.0
 @export var max_jump_count:int = 1
 @export var crouch_speed:float = 9
 
@@ -27,7 +27,7 @@ var force:Vector3
 # var walljump_impulse:Vector3
 
 ## applies a force to this entity to move.
-## usually you only want an entity to move horizontally, which is what `vertical_only` is for.
+## usually you only want an entity to move horizontally, which is what `horizontal_only` is for.
 func add_force(applyforce:Vector3, horizontal_only:bool):
 	if horizontal_only:
 		applyforce = applyforce - (applyforce*up_direction)
@@ -51,17 +51,14 @@ func _ready() -> void:
 	if not Engine.is_editor_hint():
 		$CrouchCollision/CSGBox3D.queue_free()
 		$CrouchCollision/CSGBox3D.queue_free()
+
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	
 	pass
 
-func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint():
-		return
-
-
+func _entity_crouch_checking(delta:float):
 	#Crouching
 	if (action & FLAG_CROUCH) == FLAG_CROUCH:
 		$DefaultCollision.disabled = true
@@ -73,7 +70,7 @@ func _physics_process(delta: float) -> void:
 		$CrouchCollision.disabled = true
 		$LookFrom.position = $LookFromUncrouched.position
 		current_speed = walk_speed
-	
+func _entity_physics_process(delta:float):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta 
@@ -82,10 +79,21 @@ func _physics_process(delta: float) -> void:
 		jump_count = max_jump_count
 	
 	var modifiers = 1
-	if not is_on_floor():
-		modifiers -= air_speed_modifier
 	
-	velocity = (velocity - velocity*up_direction).move_toward(force, acceleration*delta*modifiers) + velocity*up_direction
+	if is_on_floor():
+		velocity = (velocity - velocity*up_direction).move_toward(force, acceleration*delta*modifiers) + velocity*up_direction
+	elif not force.is_zero_approx():
+		# velocity = (velocity - velocity*up_direction).move_toward(force*2, acceleration*delta*modifiers*air_speed_modifier) + velocity*up_direction
+		var current_hori_velocity = velocity - velocity*up_direction
+		var next_hori_velocity = current_hori_velocity.move_toward(force, acceleration*delta*modifiers*2)
+		var final_hori_velocity = Vector3()
+
+		if next_hori_velocity.length() > current_hori_velocity.length() and current_hori_velocity.length() > 1:
+			final_hori_velocity = current_hori_velocity
+		else:
+			final_hori_velocity = next_hori_velocity
+		
+		velocity = final_hori_velocity + velocity*up_direction
 
 	# a pathetic implementation of walljumping, do we even want wall jumping? or are midair jumps fine.
 	# if (not is_on_floor()) and is_on_wall() and walljump_impulse.is_zero_approx():
@@ -118,7 +126,14 @@ func _physics_process(delta: float) -> void:
 		# if not walljump_impulse.is_zero_approx():
 			# velocity = walljump_impulse + velocity*up_direction
 			# walljump_impulse = Vector3()
+
+func _physics_process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
 	
+	_entity_crouch_checking(delta)
+	_entity_physics_process(delta)
+
 	# previous_velocity = velocity
 	move_and_slide()
 
