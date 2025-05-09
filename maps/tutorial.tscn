@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cndtksx034aae"]
+[gd_scene load_steps=24 format=3 uid="uid://cndtksx034aae"]
 
 [ext_resource type="PackedScene" uid="uid://bq8r8yk47xi2m" path="res://maps/base_map.tscn" id="1_q213a"]
 [ext_resource type="Script" uid="uid://cu1fkvcsy4wfx" path="res://maps/tutorial.gd" id="2_x7mfr"]
@@ -89,9 +89,16 @@ emission_enabled = true
 emission = Color(0.933831, 0.784326, 0.095294, 1)
 emission_energy_multiplier = 1.23
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_gm6ol"]
+viewport_path = NodePath("ObstacleCourse/SlamBounceTutorial/InstructSlamBounce/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_50mgq"]
+
 [node name="Tutorial" instance=ExtResource("1_q213a")]
 script = ExtResource("2_x7mfr")
-elevator_progress = 0.0
+elevator_target_array_current = 1
+elevator_target_array_previous = 0
+elevator_progress = 0.37
 
 [node name="DirectionalLight3D" parent="." index="0"]
 layers = 0
@@ -104,6 +111,9 @@ environment = SubResource("Environment_fwf7s")
 process_mode = 4
 visible = false
 use_collision = false
+
+[node name="Camera3D" parent="." index="3"]
+transform = Transform3D(-0.251243, 0.748637, -0.61353, 0, 0.633862, 0.773447, 0.967924, 0.194323, -0.159254, 0, 5.0078, 0)
 
 [node name="MapBoundaries" type="CSGCylinder3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.475586, 0)
@@ -180,14 +190,14 @@ radius = 64.4897
 height = 1.04883
 
 [node name="SpawnLight" parent="." index="5" instance=ExtResource("3_x7mfr")]
-transform = Transform3D(1, 0, 0, 0, 0.648213, 0.761459, 0, -0.761459, 0.648213, -0.518264, 84.6008, 57.07)
+transform = Transform3D(1, 0, 0, 0, 0.648213, 0.761459, 0, -0.761459, 0.648213, -0.518264, 49.3891, 27.0951)
 light_color = Color(0.609806, 0.288826, 0.00834193, 1)
 light_energy = 250.0
 shadow_normal_bias = 2.781
 shadow_reverse_cull_face = true
-spot_range = 124.916
+spot_range = 70.9789
 spot_attenuation = 0.0
-spot_angle = 2.57
+spot_angle = 4.0
 spot_angle_attenuation = 0.482972
 
 [node name="MapLantern" type="CSGCylinder3D" parent="." index="6"]
@@ -216,15 +226,15 @@ spot_angle_attenuation = 0.707111
 [node name="Tutorial" type="Node" parent="." index="8"]
 
 [node name="SpawnWall" type="CSGBox3D" parent="Tutorial" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5968, 13.0351, -1.20231)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5968, 24.2087, 2.76132)
 use_collision = true
-size = Vector3(2.89551, 26.6074, 47.2043)
+size = Vector3(2.89551, 48.9546, 55.1316)
 
 [node name="JumpTutorial" type="CSGBox3D" parent="Tutorial" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60319, 2.92279, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.28544, 2.92279, 4)
 use_collision = true
 collision_mask = 0
-size = Vector3(24.4214, 6.84558, 1)
+size = Vector3(23.0569, 6.84558, 1)
 material = SubResource("StandardMaterial3D_ju2a6")
 
 [node name="CrouchTutorial" type="CSGBox3D" parent="Tutorial" index="2"]
@@ -235,15 +245,15 @@ size = Vector3(22.5786, 15.6494, 1)
 material = SubResource("StandardMaterial3D_lfi8r")
 
 [node name="SpawnWall2" type="CSGBox3D" parent="Tutorial" index="3"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.551482, 13.162, -24.3016)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.551482, 24.3486, -24.3016)
 use_collision = true
-size = Vector3(1.98816, 26.4917, 21.401)
+size = Vector3(1.98816, 48.865, 21.401)
 material = SubResource("StandardMaterial3D_gm6ol")
 
 [node name="SpawnWall3" type="CSGBox3D" parent="Tutorial" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1347, 13.1765, -1.23174)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1347, 15.2372, -0.803622)
 use_collision = true
-size = Vector3(2.53796, 26.3901, 46.8277)
+size = Vector3(2.53796, 30.5116, 47.6839)
 
 [node name="Window" type="CSGBox3D" parent="Tutorial" index="5"]
 transform = Transform3D(1, 0, 0, 0, 0.645858, -0.763458, 0, 0.763458, 0.645858, -0.834959, 18.1511, -2.27722)
@@ -299,7 +309,7 @@ size = Vector3(19.4768, 1, 18.3328)
 material = SubResource("StandardMaterial3D_m6v04")
 
 [node name="CrouchIndicator" parent="Tutorial" index="10" instance=ExtResource("3_x7mfr")]
-transform = Transform3D(1, 0, 0, 0, 0.912955, 0.408059, 0, -0.408059, 0.912955, -1.90735e-06, 12.7488, 60.4062)
+transform = Transform3D(0.728431, -0.501895, 0.466358, 1.67638e-08, 0.680696, 0.732566, -0.685119, -0.533624, 0.49584, 11.939, 17.2076, 27.7746)
 light_energy = 11.836
 spot_range = 56.4068
 spot_attenuation = 0.0
@@ -327,10 +337,55 @@ not increase it beyond 1,
 so don't turn too tight."
 horizontal_alignment = 1
 
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Tutorial" index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.260261, -0.0958142, -15.0861)
+use_collision = true
+radius = 1.70947
+
+[node name="Hole" type="CSGBox3D" parent="Tutorial" index="13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99109, 25.9882, -16.1221)
+use_collision = true
+size = Vector3(7.45435, 1, 14.6143)
+
+[node name="Hole2" type="CSGBox3D" parent="Tutorial" index="14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.94548, 25.9882, -16.1221)
+use_collision = true
+size = Vector3(7.45435, 1, 14.6143)
+
+[node name="Hole3" type="CSGBox3D" parent="Tutorial" index="15"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.757133, 25.9882, -20.9983)
+use_collision = true
+size = Vector3(7.45435, 1, 4.89258)
+
+[node name="Hole4" type="CSGBox3D" parent="Tutorial" index="16"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.757133, 25.9882, -10.816)
+use_collision = true
+size = Vector3(7.45435, 1, 3.97131)
+
+[node name="Shaftwall" type="CSGBox3D" parent="Tutorial" index="17"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.72882, 64.3645, -15.6047)
+use_collision = true
+size = Vector3(0.92981, 76.0666, 5.84708)
+
+[node name="Shaftwall2" type="CSGBox3D" parent="Tutorial" index="18"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75753, 64.3645, -15.6047)
+use_collision = true
+size = Vector3(0.92981, 76.0666, 5.84708)
+
+[node name="Shaftwall3" type="CSGBox3D" parent="Tutorial" index="19"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.311357, 64.3645, -12.7293)
+use_collision = true
+size = Vector3(6.62479, 76.0666, 1.62833)
+
+[node name="Shaftwall4" type="CSGBox3D" parent="Tutorial" index="20"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.311357, 64.3645, -18.8166)
+use_collision = true
+size = Vector3(6.62479, 76.0666, 1.62833)
+
 [node name="ObstacleCourse" type="Node" parent="." index="9"]
 
 [node name="Elevator" type="AnimatableBody3D" parent="ObstacleCourse" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.365717, 27.1337)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.77382, 27.1337)
 collision_mask = 0
 input_ray_pickable = false
 
@@ -348,6 +403,10 @@ top_level = true
 [node name="Target2" type="Marker3D" parent="ObstacleCourse/Elevator" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.1502, 27.1337)
 top_level = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="ObstacleCourse/Elevator" index="3"]
+light_color = Color(1.34766e-06, 0.845522, 0.775508, 1)
+omni_range = 10.0
 
 [node name="Platform1" type="CSGBox3D" parent="ObstacleCourse" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8266, 30.5458, 26.4518)
@@ -381,20 +440,80 @@ use_collision = true
 size = Vector3(17.8748, 17.562, 2.14014)
 material = SubResource("StandardMaterial3D_4gvda")
 
-[node name="Platform2" type="CSGBox3D" parent="ObstacleCourse" index="3"]
+[node name="HighlightPlatform1" type="CSGBox3D" parent="ObstacleCourse" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7596, 30.5458, 16.6569)
 use_collision = true
 size = Vector3(9.58923, 1, 8.09314)
 material = SubResource("StandardMaterial3D_fqkom")
 
 [node name="Seperator2" type="CSGBox3D" parent="ObstacleCourse" index="4"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.89731, 39.8151, 13.5809)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.8718, 39.4915, -0.657163)
 use_collision = true
-size = Vector3(18.3012, 17.9571, 2.14014)
+size = Vector3(46.7773, 18.6042, 2.19116)
 
-[node name="MainCharacterEntity" parent="." index="10" instance=ExtResource("4_2337y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0541296, 4.15136, -17.217)
+[node name="OOBWall2" type="CSGBox3D" parent="ObstacleCourse" index="5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 14.9995, 23.4437, 30.4158)
+use_collision = true
+size = Vector3(56.1368, 1, 51.7665)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." index="11"]
+[node name="OOBWall" type="CSGBox3D" parent="ObstacleCourse" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.9496, 28.7971, 6.76521)
+use_collision = true
+size = Vector3(2.53796, 57.6313, 47.6839)
+
+[node name="OOBWall3" type="CSGBox3D" parent="ObstacleCourse" index="7"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 32.1805, 23.4437, -17.3768)
+use_collision = true
+size = Vector3(21.7749, 1, 51.7665)
+
+[node name="SlamBounceTutorial" type="Marker3D" parent="ObstacleCourse" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4563, 31.3599, 1.11988)
+
+[node name="Seperator3" type="CSGBox3D" parent="ObstacleCourse/SlamBounceTutorial" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.33055, 1.12997, 2.46008)
+use_collision = true
+size = Vector3(27.8857, 25.2761, 1)
+material = SubResource("StandardMaterial3D_4gvda")
+
+[node name="HighlightPlatform2" type="CSGBox3D" parent="ObstacleCourse/SlamBounceTutorial" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.62225, -11.3099, -13.2246)
+use_collision = true
+size = Vector3(11.0621, 1, 10.7168)
+material = SubResource("StandardMaterial3D_fqkom")
+
+[node name="InstructSlamBounce" type="Sprite3D" parent="ObstacleCourse/SlamBounceTutorial" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55152, 5.80611, 8.6453)
+billboard = 1
+texture = SubResource("ViewportTexture_gm6ol")
+
+[node name="SubViewport" type="SubViewport" parent="ObstacleCourse/SlamBounceTutorial/InstructSlamBounce" index="0"]
+transparent_bg = true
+size = Vector2i(642, 232)
+
+[node name="Label" type="Label" parent="ObstacleCourse/SlamBounceTutorial/InstructSlamBounce/SubViewport" index="0"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Slam by pressing CTRL while in the air. 
+You can then jump shortly after 
+landing to get a higher jump that 
+scales with how long you slammed."
+horizontal_alignment = 1
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.285204, 16.7235)
 omni_range = 20.6498
+
+[node name="MainCharacterEntity" parent="." index="11" instance=ExtResource("4_2337y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000209898, 98.9743, -15.0421)
+base_jump_force = 20.0
+
+[node name="SpawnDownForce" type="Area3D" parent="." index="12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 98.3647, -15.0421)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnDownForce" index="0"]
+shape = SubResource("BoxShape3D_50mgq")

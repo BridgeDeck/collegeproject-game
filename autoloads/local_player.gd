@@ -116,8 +116,14 @@ static func camera_lookaround(camera:Camera3D,
 	sensitivity:float):
 	const NORMALIZER = 0.001
 
+
 	camera.rotate(up_direction, -player_input.x * sensitivity * NORMALIZER)
+
+	var prev_basis = camera.global_basis
 	camera.rotate_object_local(Vector3.LEFT, player_input.y * sensitivity * NORMALIZER)
+	if (-camera.global_basis.z).angle_to(up_direction) < deg_to_rad(6) or (-camera.global_basis.z).angle_to(-up_direction) < deg_to_rad(6):
+		camera.global_basis = prev_basis
+	
 
 	camera.global_basis = Basis.looking_at(-camera.global_basis.z, up_direction)
 

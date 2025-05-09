@@ -10,7 +10,7 @@ size = Vector3(0.5, 2, 0.5)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7n7gl"]
 resource_local_to_scene = true
 transparency = 1
-albedo_color = Color(0, 1, 1, 0.1)
+albedo_color = Color(0, 1, 1, 0.334)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5vndw"]
 resource_local_to_scene = true
@@ -23,13 +23,21 @@ albedo_color = Color(0.984, 0.875, 0, 0.1)
 
 [node name="MainCharacterEntity" instance=ExtResource("1_7n7gl")]
 platform_on_leave = 2
-safe_margin = 0.1
 script = ExtResource("2_5vndw")
+base_jump_force = 18.0
 max_dash_allowance = 3.0
 dash_regeneration = 0.6
 dash_duration = 0.1
 dash_speed = 72.0
 slam_speed = 80.0
+current_slam_direction = Vector3(0, 0, 0)
+slam_bounce_degrade = 10.0
+slam_bounce = 0.0
+dash_allowance = null
+current_dash_duration = 0.0
+current_dash_direction = Vector3(0, 0, 0)
+prevdash_duration = 0.0
+jump_force = 20.0
 acceleration = 96.0
 crouch_speed = 6.0
 

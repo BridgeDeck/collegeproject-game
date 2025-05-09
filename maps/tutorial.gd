@@ -2,8 +2,8 @@
 extends "res://maps/base_map.gd"
 
 @onready var elevator_target_array = [$ObstacleCourse/Elevator/Target1, $ObstacleCourse/Elevator/Target2]
-var elevator_target_array_current:int = 1
-var elevator_target_array_previous:int = 0
+@export_storage var elevator_target_array_current:int = 1
+@export_storage var elevator_target_array_previous:int = 0
 
 const PROGRESS_SECS = 2.5
 
@@ -14,9 +14,12 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
-	LocalPlayer.player_camera_state = LocalPlayer.PlayerCameraState.PLAYER_FIRST_PERSON
-	LocalPlayer.controlled_entity = $MainCharacterEntity
-	LocalPlayer.player_camera = $Camera3D
+	first_person($MainCharacterEntity)
+	$SpawnDownForce.body_entered.connect(_throw_player_down)
+
+func _throw_player_down(body):
+	$MainCharacterEntity.current_slam_direction = -$MainCharacterEntity.up_direction
+
 
 ## Pick the next target for the Elevator
 func next_elev_target():

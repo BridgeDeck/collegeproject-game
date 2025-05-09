@@ -3,6 +3,8 @@
 extends Entity
 class_name MainCharacterEntity
 
+@export var base_jump_force:float = 18.0
+
 ## The maximum amount of dashes this entity can do at once
 @export var max_dash_allowance:float = 1.0
 
@@ -19,7 +21,10 @@ class_name MainCharacterEntity
 @export var slam_speed:float = 80.0
 
 ## Used to indicate that this entity is slamming, and in what direction
-var current_slam_direction:Vector3 = Vector3()
+@export_storage var current_slam_direction:Vector3 = Vector3()
+
+@export var slam_bounce_degrade:float = 10.0
+var slam_bounce:float = 0.0
 
 ## An allowance of dashes that will deplete and regenerate as this entity dashes, or does anything else that depletes the allowance.
 var dash_allowance:float = max_dash_allowance
@@ -59,6 +64,17 @@ func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	
+	if slam_bounce > base_jump_force:
+		jump_force = slam_bounce
+	else:
+		jump_force = base_jump_force
+
+	if (not ((action_previous & FLAG_JUMP) == FLAG_JUMP)) \
+		and ((action & FLAG_JUMP) == FLAG_JUMP) \
+		and jump_count > 0 \
+		and can_jump():
+		slam_bounce = 0.0
+
 	# Do all the standard entity physics stuff BEFORE doing more player based things
 	_entity_physics_process(delta)
 
@@ -95,15 +111,18 @@ func _physics_process(delta: float) -> void:
 		and (action & FLAG_CROUCH) == FLAG_CROUCH \
 		and not is_on_floor():
 			current_slam_direction = -up_direction
+			slam_bounce = 0
 	
 	# Handle slamming
 	if not current_slam_direction.is_zero_approx():
 		if is_on_floor(): # Stop slamming once on floor
 			current_slam_direction = Vector3()
-		else: # Otherwise apply constant force towards the slam direction
+		else: # Otherwise apply constant force towards the slam direction aswell as adding slam_bounce
 			velocity = current_slam_direction * slam_speed
+			slam_bounce += slam_speed * delta
 		
-	else: # If not slamming, just do crouching as normal
+	else: # If not slamming, just do crouching as normal and start degrading the slam bounce
+		slam_bounce = move_toward(slam_bounce, 0, slam_bounce_degrade*delta)
 		_entity_crouch_checking(delta)
 	
 	move_and_slide()

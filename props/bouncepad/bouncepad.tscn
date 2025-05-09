@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf88m8gj7kwfo"]
+
+[ext_resource type="Script" uid="uid://v5gn33vwhgpy" path="res://props/bouncepad/bouncepad.gd" id="1_xc5oc"]
+
+[node name="Bouncepad" type="Area3D"]
+script = ExtResource("1_xc5oc")
