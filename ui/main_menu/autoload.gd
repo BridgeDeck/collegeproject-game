@@ -1,3 +1,5 @@
+## Autoload for handling the Main Menu only
+
 extends Node
 
 var node_main_menu:Control
@@ -11,6 +13,8 @@ func _enter_tree() -> void:
 
 
 func _process(delta: float) -> void:
+	# This autoloads only purpose: to check if nothing else important is being displayed so it can display the main menu.
+	# THis autoload is the ultimate fallback option
 	var should_be_visible = true
 	
 	if Engine.is_editor_hint():

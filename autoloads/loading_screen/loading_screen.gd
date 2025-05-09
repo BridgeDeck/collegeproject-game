@@ -1,7 +1,10 @@
 @tool
 extends Control
 
+## How much the bar has progressed
 @export_range(0.05, 1.0, 0.01) var progress = 0.05 : set=set_progress
+
+## BBCode text
 @export var loading_text:String : set=set_loading_text, get=get_loading_text
 
 func set_progress(value):

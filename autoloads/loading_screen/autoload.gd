@@ -1,10 +1,16 @@
 @tool
 extends Node
 
+# The actual screen
 var screen:Control
 
+## An abstraction over whether the screen is visible or not
 var active:bool : set=set_active, get=get_active
+
+## An abstraction over the loading bar progress
 var progress : set=set_progress, get=get_progress
+
+## An abstraction over the current loading text (can be in BBCode format aswell)
 var loading_text:String : set=set_loading_text, get=get_loading_text
 
 func _enter_tree() -> void:
